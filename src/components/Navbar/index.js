@@ -2,7 +2,7 @@ import React from "react";
 
 function Navbar() {
   return (
-    <div className="navbar">
+    <nav className="navbar">
       <ul>
         <li className="brand">
           <a href="/">Clicky Game</a>
@@ -11,7 +11,7 @@ function Navbar() {
         {/* Import score variables, then use JSX variables*/}
         <li>Score: 0 | Top Score: 0</li>
       </ul>
-    </div>
+    </nav>
   );
 }
 

@@ -3,7 +3,20 @@ import React from "react";
 class Main extends React.Component {
   state = {
     count: 0,
-    clickItems: []
+    clickItems: [
+      "images/beth.png",
+      "images/birdperson.png",
+      "images/evilmorty.png",
+      "images/gianthead.png",
+      "images/goldenford.png",
+      "images/jerry.png",
+      "images/jessica.png",
+      "images/meeseeks.png",
+      "images/morty.png",
+      "images/mr.png",
+      "images/rick.png",
+      "images/summer.png"
+    ]
   };
 
   // handleIncrement increases this.state.count by 1
@@ -18,21 +31,33 @@ class Main extends React.Component {
     this.setState({ count: this.state.count - 1 });
   };
 
+  shuffle = function(array) {
+    let arr = array;
+    for (let i = arr.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+
+      // let t = arr[i];
+      // arr[i] = arr[j];
+      // arr[j] = t;
+
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    this.setState({ clickItems: arr });
+  };
+
   render() {
     return (
-      <div>
-        <div>
-          {this.state.clickItems.forEach(item => (
-            //   Note to self: Remember to use JSX variable for the image. e.g. this.state.clickItems.imageUrl
-            <div
-              className="click-item"
-              role="img"
-              aria-label="click item"
-              style="background-image=url('/assets/images/image01.png');"
-            ></div>
-          ))}
-        </div>
-      </div>
+      <main className="container">
+        {this.state.clickItems.map(item => (
+          <div
+            className="click-item"
+            role="img"
+            aria-label="click item"
+            style={{ backgroundImage: `url(${item})` }}
+            onClick={() => this.shuffle(this.state.clickItems)}
+          ></div>
+        ))}
+      </main>
     );
   }
 }
