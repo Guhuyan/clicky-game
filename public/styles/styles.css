@@ -68,6 +68,7 @@
   font-size: calc(10px + 14 * (100vw - 320px) / 800);
   z-index: 99;
   white-space: nowrap;
+  display: block;
 }
 
 .navbar ul {
