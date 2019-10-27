@@ -1,7 +1,10 @@
 import React from "react";
+import Nav from "../Navbar";
 
 class Main extends React.Component {
   state = {
+    score: 0,
+    topScore: 0,
     count: 0,
     clickItems: [
       "images/beth.png",
@@ -16,20 +19,40 @@ class Main extends React.Component {
       "images/mr.png",
       "images/rick.png",
       "images/summer.png"
-    ]
+    ],
+    correctGuesses: []
   };
 
-  // handleIncrement increases this.state.count by 1
+  // handleIncrement increases this.state.count by 1 to keep track of how many consecutive correct guesses the user had guessed
   handleIncrement = () => {
-    // We always use the setState method to update a component's state
     this.setState({ count: this.state.count + 1 });
   };
 
-  // handleDecrement decreases this.state.count by 1
-  handleDecrement = () => {
-    // We always use the setState method to update a component's state
-    this.setState({ count: this.state.count - 1 });
-  };
+  // This isn't working at the moment since event is not defined.  I am not exactly sure how the onClick() is referenced.
+  // This checkGuess() method is supposed to set style equal to event.target.style (the value of the style tag) and check to see if
+  // style is already in the correctGuesses array.  If it is, we'd set the score and count to 0, update the topScore with the count,
+  // and empties out the correctGuesses array.  If style is not in the correctGuesses array, we'd call the handleIncrement method
+  // to increment the count by 1, and "push" the style value into the correctGuesses array by spreading the array with the new value
+  // via the setState() method.  Regardless of the conditional passing or failing, we also want to pass two props into the Nav
+  // component to render it with the new values.
+  // checkGuess = event => {
+  //   let style = event.target.style;
+  //   if (this.state.correctGuesses.includes(style)) {
+  //     this.setState({ score: 0 });
+  //     this.setState({ topScore: this.state.count });
+  //     this.setState({ count: 0 });
+  //     this.setState({
+  //       correctGuesses: []
+  //     });
+  //     Nav(this.state.score, this.state.topScore);
+  //   } else {
+  //     this.handleIncrement();
+  //     this.setState({
+  //       correctGuesses: [...this.state.correctGuesses, event.target.style]
+  //     });
+  //     Nav(this.state.score, this.state.topScore);
+  //   }
+  // };
 
   shuffle = function(array) {
     let arr = array;
@@ -54,7 +77,10 @@ class Main extends React.Component {
             role="img"
             aria-label="click item"
             style={{ backgroundImage: `url(${item})` }}
-            onClick={() => this.shuffle(this.state.clickItems)}
+            onClick={() => {
+              this.shuffle(this.state.clickItems);
+              // this.checkGuess();
+            }}
           ></div>
         ))}
       </main>

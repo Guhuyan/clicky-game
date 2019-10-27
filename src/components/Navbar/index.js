@@ -1,6 +1,6 @@
 import React from "react";
 
-function Navbar() {
+function Navbar(props) {
   return (
     <nav className="navbar">
       <ul>
@@ -9,7 +9,9 @@ function Navbar() {
         </li>
         <li className="">Click an image to begin!</li>
         {/* Import score variables, then use JSX variables*/}
-        <li>Score: 0 | Top Score: 0</li>
+        <li>
+          Score: {props.score || "0"} | Top Score: {props.topScore || "0"}
+        </li>
       </ul>
     </nav>
   );
